@@ -6,6 +6,7 @@ public class NoteLane : MonoBehaviour
 {
     [SerializeField] private int laneNumber = 1;
     private GameObject notePrefab;
+    private SpriteRenderer renderer;
     private float audioTime;
 
     public Queue<NoteObject> inactiveNotes;
@@ -14,6 +15,7 @@ public class NoteLane : MonoBehaviour
     void Awake()
     {
         notePrefab = Resources.Load<GameObject>("Prefabs/Note");
+        renderer = transform.GetChild(0).GetComponent<SpriteRenderer>();
     }
 
     public void Initialize(List<GameNote> gameNotes)
@@ -23,7 +25,7 @@ public class NoteLane : MonoBehaviour
         {
             NoteObject noteObject = Instantiate(notePrefab).GetComponent<NoteObject>();
             noteObject.transform.parent = this.transform;
-            noteObject.Initialize(gameNote.NoteTime);
+            noteObject.Initialize(gameNote);
             noteObjects.Add(noteObject);
         }
         inactiveNotes = new Queue<NoteObject>(noteObjects);
@@ -39,6 +41,22 @@ public class NoteLane : MonoBehaviour
         }
     }
 
+    public GameNote.Accurary CheckHit()
+    {
+        StartCoroutine(fadeColor());
+        NoteObject note = activeNotes.Count > 0 ? activeNotes[0] : null;
+        if (note == null)
+        {
+            return GameNote.Accurary.INVALID;
+        }
+        var accurary = note.checkHit();
+        if (accurary != GameNote.Accurary.INVALID)
+        {
+            activeNotes.Remove(note);
+        }
+        return accurary;
+    }
+
     public void StartGame(float waitTimeBeforStarting)
     {
 
@@ -47,9 +65,14 @@ public class NoteLane : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        while (inactiveNotes.Count > 0 && audioTime + 1 > inactiveNotes.Peek().NoteTime)
+        while (inactiveNotes.Count > 0 && audioTime + 2 > inactiveNotes.Peek().NoteTime)
         {
             activeNotes.Add(inactiveNotes.Dequeue());
+        }
+
+        while (activeNotes.Count > 0 && audioTime - .6f > activeNotes[0].NoteTime)
+        {
+            activeNotes.RemoveAt(0);
         }
     }
 
@@ -62,4 +85,18 @@ public class NoteLane : MonoBehaviour
             next = inactiveNotes.Count > 0 ? inactiveNotes.Peek() : null;
         }
     }
+
+    private IEnumerator fadeColor()
+    {
+        renderer.color = Color.red;
+        yield return new WaitForEndOfFrame();
+        var t = 1f;
+        while(t > 0)
+        {
+            t -= 4 * Time.deltaTime;
+            renderer.color = Color.Lerp(Color.white, Color.red, t);
+            yield return new WaitForEndOfFrame();
+        }
+    }
+
 }

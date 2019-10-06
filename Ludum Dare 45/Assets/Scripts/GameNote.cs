@@ -13,7 +13,7 @@ public class GameNote
 
     public bool Hit { get; set;  }
 
-    private const float COMPARISON_WINDOW = .3F;
+    private const float COMPARISON_WINDOW = .25F;
     private const float GREAT = COMPARISON_WINDOW * .6F;
     private const float GOOD = COMPARISON_WINDOW * .7F;
     private const float OK = COMPARISON_WINDOW * .75F;

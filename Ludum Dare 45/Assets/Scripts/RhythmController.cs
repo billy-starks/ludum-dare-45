@@ -29,6 +29,11 @@ public class RhythmController : MonoBehaviour
     private float noteAccurary;
     private int notesPassed;
 
+    private KeyCode key1 = KeyCode.D;
+    private KeyCode key2 = KeyCode.F;
+    private KeyCode key3 = KeyCode.J;
+    private KeyCode key4 = KeyCode.K;
+
     private const float COMPARISON_WINDOW = .3F;
     private const float GREAT = COMPARISON_WINDOW * .6F;
     private const float GOOD = COMPARISON_WINDOW * .7F;
@@ -57,9 +62,21 @@ public class RhythmController : MonoBehaviour
         }
 
         // TODO: Check input; send correct hit to lane
-        if (Input.anyKeyDown)
+        if (Input.GetKeyDown(key1))
         {
-            // CheckHit(audioTime);
+            noteLanes[0].CheckHit();
+        }
+        if (Input.GetKeyDown(key2))
+        {
+            noteLanes[1].CheckHit();
+        }
+        if (Input.GetKeyDown(key3))
+        {
+            noteLanes[2].CheckHit();
+        }
+        if (Input.GetKeyDown(key4))
+        {
+            noteLanes[3].CheckHit();
         }
     }
 

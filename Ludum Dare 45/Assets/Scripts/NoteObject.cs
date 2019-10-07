@@ -77,6 +77,8 @@ public class NoteObject : MonoBehaviour
 
     private IEnumerator hitEffect()
     {
+        /** This is distracting, consider replacing or just delete */
+        /**
         var t = 0f;
         var startColor = renderer.color;
         var fadeColor = new Color(1, .8f, 0, 0);
@@ -86,7 +88,9 @@ public class NoteObject : MonoBehaviour
             renderer.color = Color.Lerp(startColor, fadeColor, t);
             yield return new WaitForEndOfFrame();
         }
+        */
         renderer.enabled = false;
+        yield return null;
     }
 }
 

@@ -2,6 +2,7 @@
 using Melanchall.DryWetMidi.Smf;
 using Melanchall.DryWetMidi.Smf.Interaction;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -12,6 +13,7 @@ public class RhythmController : MonoBehaviour
     // Data provided from the Unity UI
     private AudioSource audioSource;
     [SerializeField] private string songName;
+    [SerializeField] private AudioClip clapSfx;
 
     // List of all notes in the midi data
     List<GameNote> allNotes;
@@ -47,18 +49,38 @@ public class RhythmController : MonoBehaviour
     {
         LoadSong(songName);
         SetupNoteBoard();
-        audioSource.PlayDelayed(3);
+        StartCoroutine(StartSong(3));
+    }
+
+    private IEnumerator StartSong(float delay)
+    {
+        audioSource.Stop();
+        AudioSource.PlayClipAtPoint(clapSfx, Vector3.zero);
+        float fakeAudioTime = -delay;
+        while (fakeAudioTime < 0)
+        {
+            fakeAudioTime += Time.deltaTime;
+            foreach (NoteLane lane in noteLanes)
+            {
+                lane.syncAudioTime(fakeAudioTime);
+            }
+            yield return new WaitForEndOfFrame();
+        }
+        audioSource.Play();
     }
 
     // Update is called once per frame
     void Update()
     {
-        // Calculate audio time in seconds from sample count
-        float audioTime = audioSource.timeSamples / sampleRate;
 
-        foreach (NoteLane lane in noteLanes)
-        {
-            lane.syncAudioTime(audioTime);
+        if (audioSource.isPlaying) { 
+            // Calculate audio time in seconds from sample count
+            float audioTime = audioSource.timeSamples / sampleRate;
+
+            foreach (NoteLane lane in noteLanes)
+            {
+                lane.syncAudioTime(audioTime);
+            }
         }
 
         // TODO: Check input; send correct hit to lane

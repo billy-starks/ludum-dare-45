@@ -5,6 +5,7 @@ using UnityEngine;
 public class NoteLane : MonoBehaviour
 {
     [SerializeField] private int laneNumber = 1;
+    [SerializeField] private Color laneColor = Color.green;
     private GameObject notePrefab;
     private SpriteRenderer renderer;
     private float audioTime;
@@ -26,6 +27,7 @@ public class NoteLane : MonoBehaviour
             NoteObject noteObject = Instantiate(notePrefab).GetComponent<NoteObject>();
             noteObject.transform.parent = this.transform;
             noteObject.Initialize(gameNote);
+            noteObject.setColor(laneColor);
             noteObjects.Add(noteObject);
         }
         inactiveNotes = new Queue<NoteObject>(noteObjects);
@@ -44,17 +46,18 @@ public class NoteLane : MonoBehaviour
     public GameNote.Accurary CheckHit()
     {
         StartCoroutine(fadeColor());
-        NoteObject note = activeNotes.Count > 0 ? activeNotes[0] : null;
-        if (note == null)
+
+        var accuracy = GameNote.Accurary.INVALID;
+        foreach (NoteObject note in activeNotes)
         {
-            return GameNote.Accurary.INVALID;
+            accuracy = note.checkHit();
+            if (accuracy != GameNote.Accurary.INVALID)
+            {
+                activeNotes.Remove(note);
+                break;
+            }
         }
-        var accurary = note.checkHit();
-        if (accurary != GameNote.Accurary.INVALID)
-        {
-            activeNotes.Remove(note);
-        }
-        return accurary;
+        return accuracy;
     }
 
     public void StartGame(float waitTimeBeforStarting)
@@ -70,6 +73,7 @@ public class NoteLane : MonoBehaviour
             activeNotes.Add(inactiveNotes.Dequeue());
         }
 
+        // Remove missed notes from activeNotes
         while (activeNotes.Count > 0 && audioTime - .6f > activeNotes[0].NoteTime)
         {
             activeNotes.RemoveAt(0);

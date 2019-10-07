@@ -227,7 +227,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 906198557}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 930740698}
@@ -271,6 +271,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   songName: midiTest
+  clapSfx: {fileID: 8300000, guid: 02eb2a09483bd674ca65e7dbbbdcf956, type: 3}
 --- !u!4 &1804414072
 Transform:
   m_ObjectHideFlags: 0
@@ -481,6 +482,86 @@ PrefabInstance:
     - target: {fileID: 5345763198785413514, guid: 37ac1fae40976134099065f02c2a047f,
         type: 3}
       propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2721198661265032402, guid: 37ac1fae40976134099065f02c2a047f,
+        type: 3}
+      propertyPath: laneColor.r
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2721198661265032402, guid: 37ac1fae40976134099065f02c2a047f,
+        type: 3}
+      propertyPath: laneColor.g
+      value: 0.4166667
+      objectReference: {fileID: 0}
+    - target: {fileID: 2721198661265032402, guid: 37ac1fae40976134099065f02c2a047f,
+        type: 3}
+      propertyPath: laneColor.b
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 2721198661265032402, guid: 37ac1fae40976134099065f02c2a047f,
+        type: 3}
+      propertyPath: laneColor.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1478966999275875129, guid: 37ac1fae40976134099065f02c2a047f,
+        type: 3}
+      propertyPath: laneColor.r
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1478966999275875129, guid: 37ac1fae40976134099065f02c2a047f,
+        type: 3}
+      propertyPath: laneColor.g
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 1478966999275875129, guid: 37ac1fae40976134099065f02c2a047f,
+        type: 3}
+      propertyPath: laneColor.b
+      value: 0.45833337
+      objectReference: {fileID: 0}
+    - target: {fileID: 1478966999275875129, guid: 37ac1fae40976134099065f02c2a047f,
+        type: 3}
+      propertyPath: laneColor.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8165254735169247757, guid: 37ac1fae40976134099065f02c2a047f,
+        type: 3}
+      propertyPath: laneColor.r
+      value: 0.2509804
+      objectReference: {fileID: 0}
+    - target: {fileID: 8165254735169247757, guid: 37ac1fae40976134099065f02c2a047f,
+        type: 3}
+      propertyPath: laneColor.g
+      value: 0.3346406
+      objectReference: {fileID: 0}
+    - target: {fileID: 8165254735169247757, guid: 37ac1fae40976134099065f02c2a047f,
+        type: 3}
+      propertyPath: laneColor.b
+      value: 0.5019608
+      objectReference: {fileID: 0}
+    - target: {fileID: 8165254735169247757, guid: 37ac1fae40976134099065f02c2a047f,
+        type: 3}
+      propertyPath: laneColor.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7942160996920044576, guid: 37ac1fae40976134099065f02c2a047f,
+        type: 3}
+      propertyPath: laneColor.r
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 7942160996920044576, guid: 37ac1fae40976134099065f02c2a047f,
+        type: 3}
+      propertyPath: laneColor.g
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7942160996920044576, guid: 37ac1fae40976134099065f02c2a047f,
+        type: 3}
+      propertyPath: laneColor.b
+      value: 0.2911765
+      objectReference: {fileID: 0}
+    - target: {fileID: 7942160996920044576, guid: 37ac1fae40976134099065f02c2a047f,
+        type: 3}
+      propertyPath: laneColor.a
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []

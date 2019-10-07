@@ -13,12 +13,11 @@ public class GameNote
 
     public bool Hit { get; set;  }
 
-    private const float COMPARISON_WINDOW = .25F;
-    private const float GREAT = COMPARISON_WINDOW * .6F;
-    private const float GOOD = COMPARISON_WINDOW * .7F;
-    private const float OK = COMPARISON_WINDOW * .75F;
+    private const float COMPARISON_WINDOW = .175F;
+    private const float GREAT = COMPARISON_WINDOW * .7F;
+    private const float GOOD = COMPARISON_WINDOW * .85F;
 
-    public enum Accurary {GREAT, GOOD, OK, MISS, INVALID = -1};
+    public enum Accurary {GREAT, GOOD, OK, INVALID = -1};
 
     public GameNote(NoteName noteName, float noteTime)
     {
@@ -42,13 +41,8 @@ public class GameNote
             {
                 return Accurary.GOOD;
             }
-            else if (timeDiff < OK)
-            {
+            else { 
                 return Accurary.OK;
-            }
-            else                        
-            {
-                return Accurary.MISS;
             }
         }
 
